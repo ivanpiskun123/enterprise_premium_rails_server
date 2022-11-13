@@ -33,7 +33,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt install -yqq libpg-dev
+          apt-get update -qq
+          apt-get install -y postgresql-client
           gem install bundler
 
       - name: Install gems
