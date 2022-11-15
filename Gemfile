@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6'
@@ -49,5 +49,16 @@ group :development do
   gem 'annotate'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# Windows does not include zoneinfo filfes, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'jwt', '~> 2.2'
+gem 'devise-jwt'
+gem 'bcrypt', '~> 3.1.7'
+gem 'rack-cors'
+gem 'jsonapi-serializer'
+
+# gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml.git'
+gem 'rails_admin_rollincode', '~> 1.0'
+gem 'rails_admin', '~> 2.0'
+
