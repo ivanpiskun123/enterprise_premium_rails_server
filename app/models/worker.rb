@@ -33,7 +33,7 @@ class Worker < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :exp, numericality: {less_than: 100.0, greater_than_or_equal_to: 0.1}
 
-  before_validation :round_exp, on: [ :create, :update ]
+  after_validation :round_exp, on: [ :create, :update ]
 
   def rounded_str_exp
     if exp < 1

@@ -23,7 +23,7 @@ RSpec.describe Worker, type: :model do
 
   context 'validations' do
     it 'are passed', :aggregate_failures do
-      expect(worker).to validate_numericality_of(:number_of_cars).is_less_than(100.0).
+      expect(worker).to validate_numericality_of(:exp).is_less_than(100.0).
         is_greater_than_or_equal_to(0.1)
       expect(worker).to validate_presence_of(:email)
     end
