@@ -61,4 +61,6 @@ gem 'jsonapi-serializer'
 # gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml.git'
 gem 'rails_admin_rollincode', '~> 1.0'
 gem 'rails_admin', '~> 2.0'
+gem 'graphql'
 
+gem 'graphiql-rails', group: :development

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  post "/graphql", to: "graphql#execute"
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   namespace :api do
@@ -9,6 +13,7 @@ Rails.application.routes.draw do
         sessions: 'api/v1/users/sessions'
       }
 
+      resources :users, only: [:update, :show]
 
 
     end
