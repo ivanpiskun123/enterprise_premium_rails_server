@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_14_173744) do
+ActiveRecord::Schema.define(version: 2022_11_14_100937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2022_11_14_173744) do
   end
 
   create_table "bids", force: :cascade do |t|
-    t.boolean "status", default: false, null: false
-    t.datetime "approved_at"
+    t.integer "status", default: 1, null: false
+    t.datetime "resolved_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "worker_id"
@@ -87,11 +87,11 @@ ActiveRecord::Schema.define(version: 2022_11_14_173744) do
   end
 
   create_table "worker_achievements", force: :cascade do |t|
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "achievement_id"
     t.bigint "worker_id"
-    t.boolean "is_credited", default: false, null: false
     t.index ["achievement_id"], name: "index_worker_achievements_on_achievement_id"
     t.index ["worker_id"], name: "index_worker_achievements_on_worker_id"
   end

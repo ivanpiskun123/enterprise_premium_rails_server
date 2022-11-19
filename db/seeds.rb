@@ -141,87 +141,87 @@
 
       {
         name: "Удовлетворенность клиента",
-        description: "Более 5 раз - 5 звезд от клиента",
+        description: "Более 5 раз - 5 звезд от клиента в месяце",
         points: 5
       },
       {
         name: "Удовлетворенность клиента",
-        description: "Более 8 раз - 5 звезд от клиента",
+        description: "Более 8 раз - 5 звезд от клиента в месяце",
         points: 8
       },
       {
         name: "Удовлетворенность клиента",
-        description: "Более 10 раз - 5 звезд от клиента",
+        description: "Более 10 раз - 5 звезд от клиента в месяце",
         points: 13
       },
 
       {
         name: "Обнаружение ошибок",
-        description: "Обнаружено более 5 больших ошибок в продукте",
+        description: "Обнаружено более 5 больших ошибок в продукте в месяце",
         points: 10
       },
       {
         name: "Обнаружение ошибок",
-        description: "Обнаружено более 8 больших ошибок в продукте",
+        description: "Обнаружено более 8 больших ошибок в продукте в месяце",
         points: 15
       },
       {
         name: "Обнаружение ошибок",
-        description: "Обнаружено более 13 больших ошибок в продукте",
+        description: "Обнаружено более 13 больших ошибок в продукте в месяце",
         points: 25
       },
 
       {
         name: "Ключевое решение",
-        description: "Предложено более 2 финансообразующих идеи",
+        description: "Предложено более 2 финансообразующих идеи в месяце",
         points: 10
       },
       {
         name: "Ключевое решение",
-        description: "Предложено более 3 финансообразующих идеи",
+        description: "Предложено более 3 финансообразующих идеи в месяце",
         points: 15
       },
       {
         name: "Ключевое решение",
-        description: "Предложено более 5 финансообразующих идеи",
+        description: "Предложено более 5 финансообразующих идеи в месяце",
         points: 20
       },
 
       {
         name: "Коллективность",
-        description: "Балл отзывоо коллег не ниже 4",
+        description: "Балл отзывоо коллег не ниже 4 в месяце",
         points: 7
       },
       {
         name: "Коллективность",
-        description: "Балл отзывов коллег не ниже 4.5",
+        description: "Балл отзывов коллег не ниже 4.5 в месяце",
         points: 10
       },
       {
         name: "Коллективность",
-        description: "Балл отзывов коллег не ниже 5",
+        description: "Балл отзывов коллег не ниже 5 в месяце",
         points: 13
       },
 
       {
         name: "Сверхурочная работа",
-        description: "Отработано сверхурочно более 10%",
+        description: "Отработано сверхурочно более 10% в месяце",
         points: 5
       },
       {
         name: "Сверхурочная работа",
-        description: "Отработано сверхурочно более 20%",
+        description: "Отработано сверхурочно более 20% в месяце",
         points: 10
       },
       {
         name: "Сверхурочная работа",
-        description: "Отработано сверхурочно более 30%",
+        description: "Отработано сверхурочно более 30% в месяце",
         points: 15
       },
 
       {
         name: "За высокие баллы",
-        description: "Стабильность большой суммы баллов",
+        description: "Стабильность большой суммы баллов в месяце",
         points: 15
       },
     ]
@@ -230,13 +230,17 @@
   w = Worker.all.to_a
   a = Achievement.all.to_a
 
-  20.times do
+  25.times do
+    begin
     WorkerAchievement.create!(
       {
         achievement: a.sample,
         worker: w.sample
       }
     )
+    rescue ActiveRecord::RecordInvalid
+      puts "WA skipped"
+    end
   end
 
 user_images_url = %w[
@@ -289,6 +293,12 @@ https://res.cloudinary.com/drntpsmxs/image/upload/v1668554246/graduates/premium_
 WorkerImage.create(image_url: admin_images_url.pop, reference: User.find_by_email("admin1@gmail.com") )
 WorkerImage.create(image_url: admin_images_url.pop, reference: User.find_by_email("admin2@gmail.com") )
 
+def random_created_at(exp)
+  Time.now - rand(4..30).days
+end
 
-
+Worker.all.each do |w|
+  w.created_at = random_created_at(w.exp)
+  w.save
+end
 

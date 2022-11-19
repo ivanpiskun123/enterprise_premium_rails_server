@@ -11,8 +11,8 @@
 class Departament < ApplicationRecord
 
   has_many :workers
-  has_many :users
-
+  has_one :user
   validates :name, presence: true,uniqueness: true
+
 
 end

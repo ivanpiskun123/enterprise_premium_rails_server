@@ -1,4 +1,6 @@
 class PremiumForScoreSerializer
   include JSONAPI::Serializer
-  attributes
+
+  attributes :amount, :score
+
 end

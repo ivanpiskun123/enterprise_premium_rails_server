@@ -3,8 +3,8 @@
 # Table name: bids
 #
 #  id                   :bigint           not null, primary key
-#  approved_at          :datetime
-#  status               :boolean          default(FALSE), not null
+#  resolved_at          :datetime
+#  status               :integer          default(1), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  premium_for_score_id :bigint
@@ -24,10 +24,20 @@ class Bid < ApplicationRecord
   # approved_by
   belongs_to :user, optional: true
 
-  
-  def approve!
-    self.status = true
-    self.approved_at = Time.now
+  # statuses
+  # 0 - declined
+  # 1 - pending
+  # 2 - accepted
+
+  def apply!
+    self.status = 2
+    self.resolved_at = Time.now
+    self.save
+  end
+
+  def reject!
+    self.status = 0
+    self.resolved_at = Time.now
     self.save
   end
 

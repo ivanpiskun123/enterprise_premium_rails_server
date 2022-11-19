@@ -1,4 +1,4 @@
 class AchievementSerializer
   include JSONAPI::Serializer
-  attributes 
+  attributes :name, :description, :points
 end

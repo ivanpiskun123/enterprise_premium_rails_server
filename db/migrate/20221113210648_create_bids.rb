@@ -2,8 +2,8 @@ class CreateBids < ActiveRecord::Migration[6.1]
   def change
     create_table :bids do |t|
 
-      t.boolean :status, null: false, default: false
-      t.datetime :approved_at
+      t.integer :status, null: false, default: 1
+      t.datetime :resolved_at
 
       t.timestamps
     end

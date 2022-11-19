@@ -43,6 +43,28 @@ class Worker < ApplicationRecord
     end
   end
 
+  # calculated as total points of all time / days in company (since created_at)
+  def rating
+    total = worker_achievements.sum{|wa| wa.achievement.points}
+    days_in_company = (Time.now.to_date - created_at.to_date).to_i
+    score = (total*10/days_in_company.to_f).round
+
+    case score
+    when 0..9
+      0
+    when 10..19
+      1
+    when 20..29
+      2
+    when 30..39
+      3
+    when 40..49
+      4
+    else
+      5
+    end
+  end
+
   private
 
   def round_exp
