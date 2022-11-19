@@ -7,3 +7,8 @@ Besides of ruby/rails gems here used:
  - GraphQL
  - Backend driven UI
  - Github actions (CI tests run)
+Difference between Kurs and Diplom verison:
+ - Sorts and filters added
+ - Page Achievements (Достижения) added
+ - Info about Points for minimum premium on "Workers" page added
+ - Points sum-show added to the WorkerAchievements modal
