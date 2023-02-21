@@ -1,4 +1,5 @@
 class Api::V1::WorkersController < ApplicationController
+  skip_before_action :authenticate_user!
   def index
     if params["manager_id"].present?
       render json: {

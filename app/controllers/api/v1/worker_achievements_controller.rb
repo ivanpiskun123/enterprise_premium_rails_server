@@ -1,4 +1,5 @@
 class Api::V1::WorkerAchievementsController < ApplicationController
+  skip_before_action :authenticate_user!
   def index
     render json: {
       data: WorkerAchievementSerializer.new(WorkerAchievement.where(worker_id: params["id"], is_active: params["isActive"])).serializable_hash
